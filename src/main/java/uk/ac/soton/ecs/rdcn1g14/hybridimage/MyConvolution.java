@@ -71,10 +71,6 @@ public class MyConvolution implements SinglebandImageProcessor<Float, FImage> {
 		
 		// System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		
-		// load and display images
-		MBFImage image = ImageUtilities.readMBF(new File("./data/dog.bmp"));
-	  	//DisplayUtilities.display(dog, "Original Dog");
-		
 		// set square kernel
 	  	/*float[][] kernel = { {1, 1, 1, 1, 1, 1, 1},
 	  						 {1, 1, 1, 1, 1, 1, 1},
@@ -96,12 +92,14 @@ public class MyConvolution implements SinglebandImageProcessor<Float, FImage> {
 	  	
 	  	float[][] kernel = Gaussian2D.createKernelImage(size, sigma).pixels;
 	  	
+		// load and display images
+		MBFImage image = ImageUtilities.readMBF(new File("./data/dog.bmp"));
+	  	//DisplayUtilities.display(dog, "Original Dog");
+	  	
 	  	MBFImage dog = image.process(new MyConvolution(kernel));
 	  	DisplayUtilities.display(dog, "Low-passed Dog");
 	  	
-		image = ImageUtilities.readMBF(new File("./data/cat.bmp"));
-	  	//DisplayUtilities.display(cat, "Original Cat");
-		
+	  	
 	  	// High-pass Convolution
 	  	// set Gaussian kernel
 	  	sigma = 8;
@@ -112,6 +110,9 @@ public class MyConvolution implements SinglebandImageProcessor<Float, FImage> {
 	  		size++; 
 	  	
 	  	kernel = Gaussian2D.createKernelImage(size, sigma).pixels;
+	  	
+		image = ImageUtilities.readMBF(new File("./data/cat.bmp"));
+	  	//DisplayUtilities.display(cat, "Original Cat");
 	  	
 	  	MBFImage cat = image.process(new MyConvolution(kernel));
 	  	// subtract original cat by low-passed cat
